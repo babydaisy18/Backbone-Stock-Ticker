@@ -39,13 +39,7 @@ $(function () {
       // and appends their elements to the #app-container element.
       // It also calls client.updateModels() so prices are up-to-date.
 
-      // **Caution:** when you're calling .append(), make sure to pass it the
-      // jQuery object for the view and not just the HTML! Passing in the HTML
-      // would create a new DOM node, different from the one the View has.
-      // This isn't what we want - we wouldn't be able to listen to events on it!
-
       var renderPortfolioAndSearch = function () {
-        //Complete this helper function
 
         //create window.portfolioView; window.searchView
         window.portfolioView = new PortfolioView({ collection: window.portfolioCollection });
@@ -63,8 +57,6 @@ $(function () {
         client.updateModels();
       };
 
-      // TODO: Complete the rest of the search method.
-
       // IF QUERY EXISTS
       if (query !== null && query !== '') {
         client.searchStock(query, function (results) {
@@ -81,7 +73,6 @@ $(function () {
         //remove all existing views
         removeExistingViews();
         //make sure there are no models in window.searchResultsCollection
-        //double check this!
         window.searchResultsCollection.set([]);
         //re-render models with helper fxn
         renderPortfolioAndSearch();
@@ -89,15 +80,6 @@ $(function () {
         showingSearchView = true;
         window.searchView.setSearchTerm('');
       }
-
-      // Keep in mind that, if there is no query, then you need to set the
-      // searchResultsCollection to be empty before rendering and set the search term to ''.
-      // If there IS a query, you need to call client.searchStock and set the
-      // searchResultsCollection to its results. Then, if the search view is already up,
-      // it will auto-update to reflect the new query. Otherwise, you will need to render the
-      // portfolio and search views and set the search term to the query.
-      // Don't forget to update showingSearchView when you're done rendering/updating,
-      // and don't forget to remove the stock view!
 
     },
 
@@ -121,15 +103,6 @@ $(function () {
       //update the stock price, set showingSearchView, render the new view
       showingSearchView = false;
       window.stockView.render();
-
-      // Remember that you'll need to do the following:
-      // * Create a StockModel with the symbol passed in as an argument.
-      // * Use client.listenForPriceUpdates on this newly created model.
-      // * Assign window.stockView to be a new StockView backed by the new model,
-      //   and append its $el to the div with id app-container.
-      // * Use client.updateModels to update the stock price, set showingSearchView,
-      //   and render the new view.
-
 
     }
 
