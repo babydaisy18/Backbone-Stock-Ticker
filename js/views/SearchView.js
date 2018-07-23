@@ -2,7 +2,7 @@ $(function () {
   var SearchView = Backbone.View.extend({
     className: 'search-container',
     initialize: function () {
-      // Define the templates that we'll use to render the search bar and results
+      // Define templates to render the search bar and results
       this.searchBarTemplate = Handlebars.compile($('#search-bar-template').html());
       this.searchResultsTemplate = Handlebars.compile($('#search-results-template').html());
 
@@ -17,12 +17,12 @@ $(function () {
     },
 
     onChange: function () {
-      //Set what happens when changes are made.
+      //if changes are made
       this.renderResults();
     },
 
     render: function () {
-      //Render the search bar and the results.
+      //Render the search bar and the results
       var html = this.searchBarTemplate();
       this.$el.html(html);
       this.renderResults();
@@ -37,12 +37,12 @@ $(function () {
 
 
     search: _.debounce(function () {
-      //Search for a stock given the input, and use the router to navigate to the correct URL.
+      //Search for a stock given the input, and use the router to navigate to the correct URL
       var value = this.$('.search').val();
       window.router.navigate('q/' + value, {trigger: true});
     }, 200),
 
-    // Set the search term manually and focus the search input.
+    // Set the search term manually and focus the search input
     setSearchTerm: function (term) {
       this.$el.find('.search').val(term).focus();
     },
